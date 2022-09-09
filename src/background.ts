@@ -41,7 +41,6 @@ const updateActivity = () => { chrome.tabs.query({}, function (tabs) {
 
 setInterval(() => {
   updateActivity();
-  console.log(activity);
 
   fetch("http://localhost:3000", {
     method: "POST",
