@@ -50,4 +50,4 @@ setInterval(() => {
     body: JSON.stringify(activity),
   });
 
-}, 5000);
+}, 1000);

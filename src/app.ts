@@ -18,7 +18,6 @@ const updatePresence = (
   client: Client,
   activity: KindleActivity | undefined
 ) => {
-  console.log(activity);
   if (activity === undefined || Object.keys(activity).length === 0) {
     client.clearActivity();
     return;
@@ -55,12 +54,11 @@ const updatePresence = (
 };
 
 rpc.on("ready", () => {
-  setInterval(async () => {
-    console.log("Updating presence");
+  setInterval( () => {
     app.post("/", (req, res) => {
       updatePresence(rpc, req.body);
     });
-  }, 5000);
+  }, 1000);
 
   app.listen(3000, () => {
     console.log("Listening on port 3000");
