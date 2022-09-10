@@ -57,6 +57,7 @@ rpc.on("ready", () => {
   setInterval( () => {
     app.post("/", (req, res) => {
       updatePresence(rpc, req.body);
+      res.end();
     });
   }, 1000);
 
