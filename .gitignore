@@ -5,6 +5,7 @@ pnpm-lock.yaml
 
 # Build
 build
+kindle_rpc_config.json
 
 # Development
 .vscode
