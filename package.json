@@ -33,7 +33,8 @@
   },
   "manifest": {
     "host_permissions": [
-      "https://*/*", "http://*/*", "chrome-extension://*/*"
+      "https://*/*",
+      "http://*/*"
     ],
     "background": {
       "service_worker": "../src/extension/background.ts",
@@ -41,15 +42,18 @@
     },
     "content_scripts": [
       {
-        "matches": ["https://read.amazon.com/*"],
-        "js": ["../src/extension/content.ts"]
+        "matches": [
+          "https://read.amazon.com/*"
+        ],
+        "js": [
+          "../src/extension/content.ts"
+        ]
       }
     ],
     "permissions": [
       "tabs",
       "storage",
-      "activeTab",
-      "all_urls"
+      "activeTab"
     ]
   }
 }
