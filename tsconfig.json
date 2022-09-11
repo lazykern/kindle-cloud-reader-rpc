@@ -6,7 +6,7 @@
     "jsx": "react",
     "esModuleInterop": true,
     "paths": {
-      "~*": ["./src/extension/*"]
+      "~*": ["./src/*"]
     },
     "baseUrl": "."
   },

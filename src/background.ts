@@ -1,3 +1,4 @@
+import { useStorage } from '@plasmohq/storage';
 import { getKindleLocation, isKindleStateEqual } from './util';
 import type {
   LibraryState,
@@ -6,6 +7,8 @@ import type {
   KindleState,
 } from "./type";
 export {};
+const [port, setPort] = useStorage<number>("port", 
+(storedPort) => typeof storedPort === "number" ? storedPort : 1232)
 
 var currentState: KindleState | undefined;
 var clearFlag = false;
@@ -23,7 +26,7 @@ const fetchState = (state: KindleState | undefined) => {
   console.debug(payload);
 
   try {
-    fetch("http://localhost:1231/", {
+    fetch("http://localhost:1232/", {
       method: "PUT",
       mode: "cors",
       headers: { "Content-Length": payloadSize },
@@ -69,12 +72,13 @@ const updateActivity = () => {
 const clearActivity = (force:boolean) => {
   if (clearFlag && !force) return;
   clearFlag = true;
-    fetch("http://localhost:1231/", {
+    fetch("http://localhost:1232/", {
       method: "DELETE",
       mode: "cors",
     });
 }
 
 setInterval(() => {
+  console.log(port);
   updateActivity();
 }, 5000);

@@ -11,6 +11,7 @@
     "build": "plasmo build"
   },
   "dependencies": {
+    "@plasmohq/storage": "^0.9.1",
     "discord-rpc": "^4.0.1",
     "express": "^4.18.1",
     "path-browserify": "^1.0.1",
@@ -37,7 +38,7 @@
       "http://*/*"
     ],
     "background": {
-      "service_worker": "../src/extension/background.ts",
+      "service_worker": "../src/background.ts",
       "type": "module"
     },
     "content_scripts": [
@@ -46,7 +47,7 @@
           "https://read.amazon.com/*"
         ],
         "js": [
-          "../src/extension/content.ts"
+          "../src/content.ts"
         ]
       }
     ],

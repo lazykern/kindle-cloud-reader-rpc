@@ -15,7 +15,7 @@ try:
 except FileNotFoundError:
     config = {
         "client_id": "1017128628066209813",
-        "port": 1231,
+        "port": 1232,
         "default_image": False,
         "image_theme": "light", 
         "rpc": {
@@ -113,7 +113,7 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
         rpc_client.clear()
 
 
-server = http.server.ThreadingHTTPServer(("localhost", 1231), RequestHandler)
+server = http.server.ThreadingHTTPServer(("localhost", 1232), RequestHandler)
 try:
     server.serve_forever()
 except KeyboardInterrupt:
