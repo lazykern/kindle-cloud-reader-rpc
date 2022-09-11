@@ -16,20 +16,25 @@ except FileNotFoundError:
     config = {
         "client_id": "1017128628066209813",
         "port": 1231,
+        "default_image": False,
+        "image_theme": "light", 
         "rpc": {
-            "largeText": "Kindle",
+            "large_text": "Kindle",
             "instance": False,
             "library": {
                 "details": "Browsing Library",
                 "state": "Viewing {view}",
+                "small_text": "Browsing Library",
             },
             "notebook": {
                 "details": "Viewing Notebook",
                 "state": "{bookTitle}",
+                "small_text": "{highlightCount} highlights {noteCount} notes",
             },
             "book": {
                 "details": "Reading Book | {currentPage} / {totalPages}",
                 "state": "{bookTitle}",
+                "small_text": "Reading Book",
             },
         },
     }
@@ -82,11 +87,16 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
             keys["bookTitle"] = request_json.get("bookTitle")
             keys["currentPage"] = request_json.get("currentPage")
             keys["totalPages"] = request_json.get("totalPages")
+        
+            
+        large_image = "kindle" if config.get("default_image") else "kindle_" + config.get("image_theme")
 
         rpc_client.update(
             start=START_TIME,
-            large_image="kindle",
-            large_text=config["rpc"]["largeText"],
+            large_image=large_image,
+            large_text=config["rpc"]["large_text"],
+            small_image=location + "_" + config.get("image_theme"),
+            small_text=config["rpc"][location]["small_text"].format(**keys),
             details=config["rpc"][location]["details"].format(**keys),
             state=config["rpc"][location]["state"].format(**keys),
             instance=config["rpc"]["instance"],
