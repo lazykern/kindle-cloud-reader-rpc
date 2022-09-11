@@ -36,9 +36,15 @@
       "https://*/*", "http://*/*", "chrome-extension://*/*"
     ],
     "background": {
-      "service_worker": "../src/background.ts",
+      "service_worker": "../src/extension/background.ts",
       "type": "module"
     },
+    "content_scripts": [
+      {
+        "matches": ["https://read.amazon.com/*"],
+        "js": ["../src/extension/content.ts"]
+      }
+    ],
     "permissions": [
       "tabs",
       "storage",
