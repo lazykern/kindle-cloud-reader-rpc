@@ -1,19 +1,22 @@
+import { getKindleLocation, isKindleStateEqual } from './util';
+import type {
+  LibraryState,
+  NotebookState,
+  BookState,
+  KindleState,
+} from "./type";
 export {};
-import type { Presence } from "discord-rpc";
-import { getKindleLocation, isPresenceEqual } from "./util";
 
-var currentActivity: Presence | undefined;
+var currentState: KindleState | undefined;
+var clearFlag = false;
 
+const fetchState = (state: KindleState | undefined) => {
 
-const fetchActivity = (activity: Presence | undefined) => {
-
-  if (activity === undefined) {
-    fetch("http://localhost:1231/", {
-      method: "DELETE",
-      mode: "cors",
-    });
+  if (state === undefined) {
+    clearActivity(true);
   }
-  const payload = JSON.stringify(activity);
+
+  const payload = JSON.stringify(state);
 
   const payloadSize = payload.length.toString();
 
@@ -39,7 +42,8 @@ const updateActivity = () => {
     );
 
     if (allKindleTabs.length === 0) {
-      return undefined;
+      clearActivity(false);
+      return;
     }
 
     const kindleTab =
@@ -53,13 +57,23 @@ const updateActivity = () => {
       kindleTab.id,
       { location: location },
       (response) => {
-        if (isPresenceEqual(response, currentActivity))  return;
-        currentActivity = response;
-        fetchActivity(currentActivity);
+        if (isKindleStateEqual(response, currentState)) return;
+        currentState = response;
+        fetchState(currentState);
+        clearFlag = false;
       }
     );
   });
 };
+
+const clearActivity = (force:boolean) => {
+  if (clearFlag && !force) return;
+  clearFlag = true;
+    fetch("http://localhost:1231/", {
+      method: "DELETE",
+      mode: "cors",
+    });
+}
 
 setInterval(() => {
   updateActivity();
