@@ -6,6 +6,7 @@ from pypresence import Presence
 
 CONFIG_PATH = "kindle_rpc_config.json"
 DEFAULT_CONFIG  = {
+        "debug": False,
         "client_id": "1017128628066209813",
         "default_image": False,
         "image_theme": "light", 
@@ -63,6 +64,7 @@ CLIENT_ID = config.get("client_id")
 rpc_client = Presence(CLIENT_ID)
 rpc_client.connect()
 
+DEBUG_MODE = config.get("debug")
 
 class RequestHandler(http.server.BaseHTTPRequestHandler):
     def do_OPTIONS(self):
@@ -86,6 +88,9 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
             html.unescape(self.rfile.read(content_length).decode("utf-8"))
         )
 
+        if DEBUG_MODE:
+            print("Request JSON: ", request_json)
+
         keys = {}
 
         location = request_json.get("location")
@@ -105,7 +110,7 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
         
             
         large_image = "kindle" if config.get("default_image") else "kindle_" + config.get("image_theme")
-
+        
         rpc_client.update(
             start=START_TIME,
             large_image=large_image,
@@ -117,6 +122,10 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
             instance=config["rpc"]["instance"],
         )
 
+        if DEBUG_MODE:
+            print("RPC Updated")
+
+
     def do_DELETE(self):
         # CORS
         self.send_response(200)
@@ -126,6 +135,9 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
 
         rpc_client.clear()
+
+        if DEBUG_MODE:
+            print("RPC Cleared")
 
 
 server = http.server.ThreadingHTTPServer(("localhost", 1232), RequestHandler)
