@@ -5,17 +5,8 @@ import http.server
 from pypresence import Presence
 
 CONFIG_PATH = "kindle_rpc_config.json"
-
-try:
-    with open(CONFIG_PATH, "r") as file:
-        config = json.load(file)
-        if config["client_id"] == "":
-            print("Please set your discord application client ID in config.json")
-            exit()
-except FileNotFoundError:
-    config = {
+DEFAULT_CONFIG  = {
         "client_id": "1017128628066209813",
-        "port": 1232,
         "default_image": False,
         "image_theme": "light", 
         "rpc": {
@@ -38,9 +29,33 @@ except FileNotFoundError:
             },
         },
     }
-    with open("kindle_rpc_config.json", "w") as file:
-        json.dump(config, file, indent=4)
 
+def validate_config(config, default_config):
+    result = {}
+    for key, item in default_config.items():
+        if isinstance(item, dict):
+            if config.get(key):
+                result[key] = validate_config(config[key], item)
+            else:
+                result[key] = item
+        elif key in config:
+            result[key] = config[key]
+        else:
+            result[key] = item
+            
+    return result
+
+
+def get_config():
+    try: 
+        with open(CONFIG_PATH, "r") as file:
+            config = json.load(file)
+            config = validate_config(config, DEFAULT_CONFIG)
+    except FileNotFoundError:
+        config = DEFAULT_CONFIG
+    return config
+
+config = get_config()
 
 START_TIME = time.time()
 

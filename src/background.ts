@@ -1,14 +1,8 @@
-import { useStorage } from '@plasmohq/storage';
 import { getKindleLocation, isKindleStateEqual } from './util';
 import type {
-  LibraryState,
-  NotebookState,
-  BookState,
   KindleState,
 } from "./type";
 export {};
-const [port, setPort] = useStorage<number>("port", 
-(storedPort) => typeof storedPort === "number" ? storedPort : 1232)
 
 var currentState: KindleState | undefined;
 var clearFlag = false;
@@ -79,6 +73,5 @@ const clearActivity = (force:boolean) => {
 }
 
 setInterval(() => {
-  console.log(port);
   updateActivity();
 }, 5000);

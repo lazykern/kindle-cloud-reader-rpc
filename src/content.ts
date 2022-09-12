@@ -1,9 +1,5 @@
-import { useStorage } from "@plasmohq/storage";
 import { getElementByXpath } from "./util";
 import type { BookState, LibraryState, NotebookState } from "./type";
-
-const [port, setPort] = useStorage<number>("port", 
-(storedPort) => typeof storedPort === "number" ? storedPort : 1232)
 
 export const getLibraryState = (): LibraryState => {
   var view: LibraryState["view"] = "all";
@@ -46,7 +42,6 @@ export const getBookState = (): BookState => {
 };
 
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-  console.log(port);
   if (msg.location === "library") {
     sendResponse(getLibraryState());
   } else if (msg.location === "notebook") {
