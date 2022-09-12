@@ -72,6 +72,15 @@ const clearActivity = (force:boolean) => {
     });
 }
 
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  if (tab === undefined) return;
+  updateActivity();
+});
+
+chrome.tabs.onActivated.addListener(function (activeInfo) {
+  updateActivity();
+});
+
 setInterval(() => {
   updateActivity();
 }, 5000);
