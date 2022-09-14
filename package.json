@@ -1,8 +1,8 @@
 {
   "name": "kindle-cloud-reader-rpc",
-  "displayName": "Kindle cloud reader rpc",
-  "version": "0.0.0",
-  "description": "A basic Plasmo extension.",
+  "displayName": "Kindle Cloud Reader Rich Presence",
+  "version": "0.1.0",
+  "description": "An extension that enables rich presence for Kindle cloud reader",
   "author": "phusitsom",
   "packageManager": "npm@8.17.0",
   "type": "module",
@@ -11,6 +11,7 @@
     "build": "plasmo build"
   },
   "dependencies": {
+    "@plasmohq/storage": "^0.9.1",
     "discord-rpc": "^4.0.1",
     "express": "^4.18.1",
     "path-browserify": "^1.0.1",
@@ -33,23 +34,27 @@
   },
   "manifest": {
     "host_permissions": [
-      "https://*/*", "http://*/*", "chrome-extension://*/*"
+      "https://*/*",
+      "http://*/*"
     ],
     "background": {
-      "service_worker": "../src/extension/background.ts",
+      "service_worker": "../src/background.ts",
       "type": "module"
     },
     "content_scripts": [
       {
-        "matches": ["https://read.amazon.com/*"],
-        "js": ["../src/extension/content.ts"]
+        "matches": [
+          "https://read.amazon.com/*"
+        ],
+        "js": [
+          "../src/content.ts"
+        ]
       }
     ],
     "permissions": [
       "tabs",
       "storage",
-      "activeTab",
-      "all_urls"
+      "activeTab"
     ]
   }
 }

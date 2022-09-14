@@ -3,9 +3,15 @@ import type { BookState, LibraryState, NotebookState } from "./type";
 
 export const getLibraryState = (): LibraryState => {
   var view: LibraryState["view"] = "all";
-  if (document.URL.includes("EBOOK")) view = "books";
-  else if (document.URL.includes("COMIC")) view = "comics";
-  else if (document.URL.includes("SAMPLE")) view = "samples";
+  const url = new URL(document.URL);
+  const resourceType = url.searchParams.get("resourceType")
+  if (resourceType === "EBOOK") {
+    view = "books";
+  } else if (resourceType === "COMICS") {
+    view = "comics";
+  } else if (resourceType === "EBOOK_SAMPLE") {
+    view = "samples";
+  }
 
   return { location: "library", view };
 };

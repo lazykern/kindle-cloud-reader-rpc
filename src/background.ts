@@ -1,8 +1,5 @@
 import { getKindleLocation, isKindleStateEqual } from './util';
 import type {
-  LibraryState,
-  NotebookState,
-  BookState,
   KindleState,
 } from "./type";
 export {};
@@ -23,7 +20,7 @@ const fetchState = (state: KindleState | undefined) => {
   console.debug(payload);
 
   try {
-    fetch("http://localhost:1231/", {
+    fetch("http://localhost:1232/", {
       method: "PUT",
       mode: "cors",
       headers: { "Content-Length": payloadSize },
@@ -69,11 +66,20 @@ const updateActivity = () => {
 const clearActivity = (force:boolean) => {
   if (clearFlag && !force) return;
   clearFlag = true;
-    fetch("http://localhost:1231/", {
+    fetch("http://localhost:1232/", {
       method: "DELETE",
       mode: "cors",
     });
 }
+
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  if (tab === undefined) return;
+  updateActivity();
+});
+
+chrome.tabs.onActivated.addListener(function (activeInfo) {
+  updateActivity();
+});
 
 setInterval(() => {
   updateActivity();
