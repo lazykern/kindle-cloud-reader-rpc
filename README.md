@@ -48,7 +48,7 @@ An chrome extension that enables rich presence for Kindle Cloud Reader
   cd kindle-cloud-reader-rpc
   ```
 
-- Install dependencies
+- Install dependencies for extension
 
   - using pnpm
 
@@ -71,6 +71,14 @@ An chrome extension that enables rich presence for Kindle Cloud Reader
     ```
 
     or `npm run dev`
+
+- Load the built extension inside `build/` into the browser
+
+- Install dependencies for client
+
+  ```bash
+  python -m pip install pypresence
+  ```
 
 - Run client
 
