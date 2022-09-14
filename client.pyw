@@ -9,7 +9,7 @@ DEFAULT_CONFIG  = {
         "debug": False,
         "client_id": "1017128628066209813",
         "default_image": False,
-        "image_theme": "light", 
+        "image_theme": "dark", 
         "rpc": {
             "large_text": "Kindle",
             "instance": False,
