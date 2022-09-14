@@ -5,7 +5,10 @@ pnpm-lock.yaml
 
 # Build
 build
+*.build/
 dist
+*.dist/
+*.onefile-build/
 *.spec
 Pipfile.lock
 kindle_rpc_config.json
