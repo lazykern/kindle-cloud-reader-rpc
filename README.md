@@ -1,6 +1,6 @@
 # Kindle Cloud Reader Discord Rich Presence
 
-An chrome extension that enables rich presence for Kindle Cloud Reader
+A chrome extension that enables rich presence for Kindle Cloud Reader
 
 ## Features
 
