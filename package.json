@@ -3,7 +3,7 @@
   "displayName": "Kindle Cloud Reader Rich Presence",
   "version": "0.1.0",
   "description": "An extension that enables rich presence for Kindle cloud reader",
-  "author": "phusitsom",
+  "author": "lazykern",
   "packageManager": "npm@8.17.0",
   "type": "module",
   "scripts": {

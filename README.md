@@ -14,12 +14,12 @@ A chrome extension that enables rich presence for Kindle Cloud Reader
 
 ## Installation
 
-1. Download the chrome extension from [here](https://github.com/phusitsom/kindle-cloud-reader-rpc/releases/latest/download/kindle-rpc-extension.zip)
+1. Download the chrome extension from [here](https://github.com/lazykern/kindle-cloud-reader-rpc/releases/latest/download/kindle-rpc-extension.zip)
 2. Extract the zip file
 3. Go to `chrome://extensions/`
 4. Turn on `Developer mode`
 5. Click `Load unpacked` and select the extracted folder (the folder that contains `manifest.json`)
-6. Download the rich presence client in [releases page](https://github.com/phusitsom/kindle-cloud-reader-rpc/releases/)
+6. Download the rich presence client in [releases page](https://github.com/lazykern/kindle-cloud-reader-rpc/releases/)
 - For Windows, download `kindle-rpc.exe` or `kindle-rpc-console.exe` if you want it to show the console
 - For Linux, download `kindle-rpc-linux` and run it with `./kindle-rpc-linux`
 7. Run the rich presence client
@@ -44,7 +44,7 @@ A chrome extension that enables rich presence for Kindle Cloud Reader
 - Clone this repository
 
   ```bash
-  git clone https://github.com/phusitsom/kindle-cloud-reader-rpc.git
+  git clone https://github.com/lazykern/kindle-cloud-reader-rpc.git
   cd kindle-cloud-reader-rpc
   ```
 
