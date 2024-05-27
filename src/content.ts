@@ -37,9 +37,9 @@ export const getNotebookState = (): NotebookState => {
 
 export const getBookState = (): BookState => {
   const bookTitle =
-    document.body.getElementsByClassName("title-default")[0].textContent;
+    document.body.getElementsByClassName("fixed-book-title")[0].textContent;
   const footerTitle =
-    document.body.getElementsByClassName("footer-title")[0].textContent;
+    document.body.getElementsByClassName("footer-label")[0].textContent;
   const pageInfoList = footerTitle.match(/\d+/g);
   const currentPage = parseInt(pageInfoList[0]);
   const totalPages = parseInt(pageInfoList[1]);
