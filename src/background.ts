@@ -46,6 +46,7 @@ const updateActivity = () => {
     const kindleTab =
       allKindleTabs.find((tab) => tab.active) ||
       allKindleTabs.find((tab) => tab.url.includes("asin")) ||
+      allKindleTabs.find((tab) => tab.url.includes("manga")) ||
       allKindleTabs[0];
 
     const location = getKindleLocation(kindleTab.url);

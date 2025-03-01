@@ -15,7 +15,7 @@ export function getIntegersFromString(str: string) {
 }
 
 export function getKindleLocation(url: string): KindleLocation {
-  if (url.includes("asin")) {
+  if (url.includes("asin") || url.includes("manga")) {
     return "book";
   } else if (url.includes("kindle-library")) {
     return "library";
