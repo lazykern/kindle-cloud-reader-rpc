@@ -43,10 +43,15 @@ const updateActivity = () => {
       return;
     }
 
-    const kindleTab =
-      allKindleTabs.find((tab) => tab.active) ||
-      allKindleTabs.find((tab) => tab.url.includes("asin")) ||
-      allKindleTabs[0];
+    const tabConditions = [
+        (tab) => tab.active,
+        (tab) => tab.url.includes("asin"),
+        (tab) => tab.url.includes("manga"),
+    ];
+
+    const kindleTab = allKindleTabs.find((tab) => 
+        tabConditions.some((condition) => condition(tab))
+    ) || allKindleTabs[0];
 
     const location = getKindleLocation(kindleTab.url);
 
